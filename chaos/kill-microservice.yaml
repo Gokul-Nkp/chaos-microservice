@@ -1,0 +1,34 @@
+version: 1.0.0
+title: What happens if we kill a microservice?
+description: If a microservice is terminated, a new one should be created in its places.
+# The microservice is killed by deleting the deployment for it without a graceful period to trigger an abrupt termination.
+# Kill a microservice by name in the namespace ns.
+tags:
+- k8s
+- pod
+- deployment
+steady-state-hypothesis:
+  title: Pod exists
+  probes:
+  - name: pod-exists
+    type: probe
+    tolerance: 1
+    provider:
+      type: python
+      func: count_pods
+      module: chaosk8s.pod.probes
+      arguments:
+        label_selector: name=front-end
+        ns: sock-shop
+method:
+- name: kill-microservice
+  provider:
+    arguments:
+        ns: sock-shop
+        name: front-end
+    func: kill_microservice
+    module: chaosk8s.actions
+    type: python
+  type: action
+  pauses:
+    after: 45
