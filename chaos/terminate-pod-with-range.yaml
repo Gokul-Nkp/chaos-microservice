@@ -11,9 +11,7 @@ steady-state-hypothesis:
     type: probe
     tolerance:
       type: range
-      range:
-      - 1
-      - 2
+      range: [1,2]
     provider:
       type: python
       func: count_pods
