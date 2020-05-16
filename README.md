@@ -11,3 +11,5 @@ kubectl create namespace sock-shop
 
 kubectl apply -f complete-demo.yaml
 ##
+https://docs.chaostoolkit.org/reference/usage/install/
+##
