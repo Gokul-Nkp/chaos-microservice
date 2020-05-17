@@ -1,0 +1,44 @@
+version: 1.0.0
+title: What happens if we cordon a node
+description: All the instances are distributed among healthy nodes and the applications are healthy
+tags:
+- k8s
+- deployment
+- node
+configuration:
+  node_label:
+      type: env
+      key: NODE_LABEL
+steady-state-hypothesis:
+  title: Nodes are indestructible
+  probes:
+  - name: all-apps-are-healthy
+    type: probe
+    tolerance: true
+    provider:
+      type: python
+      func: all_microservices_healthy
+      module: chaosk8s.probes
+      arguments:
+        ns: sock-shop
+method:
+- type: action
+  name: cordon-node
+  provider:
+    type: python
+    func: cordon_node
+    module: chaosk8s.node.actions
+    arguments: #name:name of a node in the cluster
+      label_selector: ${node_label}
+      name: 'gke-chaos-default-pool-258d86ce-wr80'
+  pauses:
+    after: 10
+rollbacks:
+- type: action
+  name: uncordon-node
+  provider:
+    type: python
+    func: uncordon_node
+    module: chaosk8s.node.actions
+    arguments:
+      label_selector: ${node_label}
