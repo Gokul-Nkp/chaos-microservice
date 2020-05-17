@@ -6,8 +6,11 @@ https://github.com/microservices-demo/microservices-demo
 ## Pre-requisites
 Create a Kubernetes linux cluster. For instance, see these examples:
 AWS - KOPS
+
 Azure - Azure Container Service
+
 Google Cloud - Google Container Engine
+
 Install and configure kubectl to connect to the cluster
 ## Deploy Sock Shop
 Clone the microservices-demo repository
