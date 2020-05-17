@@ -1,6 +1,6 @@
 version: 1.0.0
-title: What happens if we kill a microservice?
-description: If a microservice is terminated, a new one should be created in its places.
+title: What happens if we kill a microservice/deployment?
+description: If a microservice/deployment is terminated, a new one should be created in its places.
 # The microservice is killed by deleting the deployment for it without a graceful period to trigger an abrupt termination.
 # Kill a microservice by name in the namespace ns.
 tags:
