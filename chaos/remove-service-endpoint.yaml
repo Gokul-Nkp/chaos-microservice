@@ -32,3 +32,14 @@ method:
   type: action
   pauses:
     after: 5
+rollbacks:
+- name: create-service-endpoint
+  provider:
+    arguments:
+      #specific path to the front-end service yaml file
+      spec_path: '/home/nkpmohanrhaj99/sock-shop/microservices-demo/deploy/kubernetes/front-end-service.yaml'
+      ns: sock-shop
+    func: create_service_endpoint
+    module: chaosk8s.service.actions
+    type: python
+  type: action
