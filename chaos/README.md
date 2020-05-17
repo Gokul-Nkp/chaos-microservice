@@ -1,4 +1,4 @@
-# Firewall
+# Firewall-http
 
 When using a Service with `spec.type: LoadBalancer`, the firewall will be opened automatically. 
 
