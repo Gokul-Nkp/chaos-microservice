@@ -1,0 +1,34 @@
+version: 1.0.0
+title: What happens if we terminate a service of the application?
+description: If a service of the application is terminated, the applications as a whole should still be operational.
+tags:
+- k8s
+- service
+- http
+configuration:
+  ingress_host:
+      type: env
+      key: HOST
+steady-state-hypothesis:
+  title: The app is healthy
+  probes:
+  - name: app-responds-to-requests
+    type: probe
+    tolerance: 200
+    provider:
+      type: http
+      timeout: 3
+      verify_tls: false
+      url: http://${ingress_host}
+method:
+- name: remove-service-endpoint
+  provider:
+    arguments:
+      name: 'front-end'
+      ns: sock-shop
+    func: remove_service_endpoint
+    module: chaosk8s.actions
+    type: python
+  type: action
+  pauses:
+    after: 5
