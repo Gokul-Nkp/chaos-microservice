@@ -1,3 +1,5 @@
+version: 1.0.0
+title: What happens if we drain a node
 description: All the instances are distributed among healthy nodes and the applications are healthy
 tags:
 - k8s
