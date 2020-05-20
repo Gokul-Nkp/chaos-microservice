@@ -10,3 +10,6 @@ You can add a firewall with the `gcloud` command line tool:
 ##
 
 `gcloud compute instances list`
+##
+
+https://cloud.google.com/kubernetes-engine/docs/how-to/exposing-apps
