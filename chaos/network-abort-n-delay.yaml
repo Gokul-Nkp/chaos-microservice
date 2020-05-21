@@ -1,0 +1,60 @@
+version: 1.0.0
+title: What happens if we abort responses
+description: If responses are aborted, the dependant application should retry and/or timeout requests
+tags:
+- k8s
+- istio
+- http
+configuration:
+  ingress_host:
+      type: env
+      key: HOST
+steady-state-hypothesis:
+  title: The app is healthy
+  probes:
+  - type: probe
+    name: app-responds-to-requests
+    tolerance: 200
+    provider:
+      type: http
+      timeout: 5
+      verify_tls: false
+      url: http://${ingress_host}
+  - type: probe
+    tolerance: 200
+    ref: app-responds-to-requests
+  - type: probe
+    tolerance: 200
+    ref: app-responds-to-requests
+  - type: probe
+    tolerance: 200
+    ref: app-responds-to-requests
+  - type: probe
+    tolerance: 200
+    ref: app-responds-to-requests
+method:
+- type: action
+  name: set-failure
+  provider:
+    type: python
+    module: chaosistio.fault.actions
+    func: set_fault
+    arguments:
+      virtual_service_name: sock-vs
+      routes:
+        - destination:
+            host: front-end
+            subset: primary
+      fault:
+        abort:
+          percentage:
+            value: 40
+          httpStatus: 500
+        delay:
+          percentage:
+            value: 40
+          fixedDelay: 5s
+      version: networking.istio.io/v1alpha3
+      ns: sock-shop
+  pauses:
+    after: 2
