@@ -52,7 +52,11 @@ kubectl create namespace sock-shop
 
 kubectl label namespace sock-shop istio-injection=enabled
 
-## After labelling the namespace , deploy the "SOCK_SHOP" app and gateway in the namespace ##
+## After labelling the namespace,deploy the "SOCK_SHOP" app and gateway in the namespace ##
+
+## Before deploying the gateway,change the type of "front-end" service to ClusterIP and comment the NodePort ##
+
+## To connect the application,connect with the ISTIO-INGRESSGATEWAY's external IP in the ISTIO-SYSTEM namespace ##
 
 ##############################
 # Destroying What We Created #
