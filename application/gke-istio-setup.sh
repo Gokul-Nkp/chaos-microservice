@@ -52,7 +52,7 @@ kubectl create namespace sock-shop
 
 kubectl label namespace sock-shop istio-injection=enabled
 
-## After labelling the namespace , deploy the app and the gateway in the namespace ##
+## After labelling the namespace , deploy the "SOCK_SHOP" app and gateway in the namespace ##
 
 ##############################
 # Destroying What We Created #
