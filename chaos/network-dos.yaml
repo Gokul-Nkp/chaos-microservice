@@ -1,0 +1,48 @@
+version: 1.0.0
+title: What happens if we run Denial of Service attacks
+description: If responses are aborted, the dependant application should retry and/or timeout requests
+tags:
+- k8s
+- pod
+- deployment
+- istio
+configuration:
+  ingress_host:
+      type: env
+      key: HOST
+steady-state-hypothesis:
+  title: The app is healthy
+  probes:
+  - type: probe
+    name: app-responds-to-requests
+    tolerance: 200
+    provider:
+      type: http
+      timeout: 5
+      verify_tls: false
+      url: http://${ingress_host}
+method:
+- type: action
+  name: DoS
+  provider:
+    type: process
+    path: kubectl
+    arguments:
+    - run
+    - siege
+    - --namespace
+    - sock-shop
+    - --image
+    - yokogawa/siege
+    - --generator
+    - run-pod/v1
+    - -it
+    - --rm
+    - --
+    - --concurrent
+    - 100
+    - --time
+    - 10S
+    - "http://${ingress_host}"
+  pauses:
+    after: 5
