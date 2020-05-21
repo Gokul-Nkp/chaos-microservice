@@ -1,5 +1,5 @@
 apiVersion: networking.istio.io/v1alpha3
-kind: Gateway
+kind: Gateway                #Istio ingress gateway
 metadata:
     name: sock-gateway
 spec:
@@ -14,7 +14,7 @@ spec:
     - "*"      # Domain name of the external website or else *
 ---
 apiVersion: networking.istio.io/v1alpha3
-kind: VirtualService
+kind: VirtualService        #Custom Routing
 metadata:
   name: sock-vs      # "just" a name for this virtualservice
   namespace: sock-shop
