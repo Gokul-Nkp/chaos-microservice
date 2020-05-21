@@ -33,7 +33,7 @@ kubectl create clusterrolebinding \
 # Install Istio #
 #################
 
-istioctl manifest apply --skip-confirmation
+istioctl manifest apply --skip-confirmation      ##Refer kiali-grafana.sh file for enabling kiali and grafana
 
 export INGRESS_HOST=$(kubectl \
     --namespace istio-system \
