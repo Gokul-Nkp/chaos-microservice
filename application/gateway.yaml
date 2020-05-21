@@ -1,0 +1,42 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+    name: sock-gateway
+spec:
+  selector:
+    istio: ingressgateway    # use istio default controller / gateway implementation
+  servers:
+  - port:
+      number: 80
+      name: http
+      protocol: HTTP
+    hosts:   
+    - "*"      # Domain name of the external website or else *
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: sock-vs      # "just" a name for this virtualservice
+  namespace: sock-shop
+spec:
+  hosts:       # which incoming host are we applying the proxy rules to???
+     - "*"    # Copy the value in the gateway hosts - usually a Domain Name
+  gateways:
+  - sock-gateway
+  http:
+  - route:
+    - destination:
+        host: front-end     # The name defined in the DestinationRule
+        subset: primary     # subset match with destinationrule subset
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule     # Defining which pods should be part of each subset
+metadata:
+  name: sock-dr           # This can be anything 
+  namespace: sock-shop
+spec:
+  host: front-end     # Service
+  subsets:        
+  - name: primary
+    labels:       # SELECTOR
+       name: front-end    # find pods with label "name:front-end"
