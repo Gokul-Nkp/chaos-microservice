@@ -13,3 +13,9 @@ You can add a firewall with the `gcloud` command line tool:
 ##
 
 https://cloud.google.com/kubernetes-engine/docs/how-to/exposing-apps
+
+# Network-Chaos
+
+Curl command to check network-abort
+
+`while true; do curl -s [istio-ingressgateway IP] | grep -E "abort|description"; sleep 0.5; done`
