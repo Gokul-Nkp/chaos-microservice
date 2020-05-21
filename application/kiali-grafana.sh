@@ -28,14 +28,24 @@ data:
   passphrase: $KIALI_PASSPHRASE
 EOF
 
-## Install Istio and Kiali ##
+## Install Istio, Kiali, Grafana ##
 
-istioctl manifest apply --set values.kiali.enabled=true --skip-confirmation
+istioctl manifest apply --set values.kiali.enabled=true --set values.grafana.enabled=true --skip-confirmation 
 
-### Deploy your application after installing Istio and Kiali ###
+## Check whether the services kiali, prometheus, grafana are running ##
+
+kubectl get svc -n istio-system
+
+### Deploy your application after installing Istio, Kiali, Grafana ###
 
 ## Run Kiali ##
 
 istioctl dashboard kiali
 
 ### Click on the URL and login using the entered username and passphrase ###
+
+## Run Grafana ##
+
+istioctl dashboard grafana
+
+### Click on the URL ###
