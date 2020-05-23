@@ -29,6 +29,8 @@ data:
   passphrase: $KIALI_PASSPHRASE
 EOF
 
+## Download Istio and set PATH (Refer: https://istio.io/docs/setup/getting-started/#download) ##
+
 ## Install Istio, Kiali, Grafana ##
 
 istioctl manifest apply --set values.kiali.enabled=true --set values.grafana.enabled=true --skip-confirmation 
