@@ -13,8 +13,9 @@ NAMESPACE=istio-system
 kubectl create namespace $NAMESPACE
 
 ## Create a Secret with the variables ##
+# Works fine with "VERSION=1.15.11-gke.13" in the 'validMasterVersions' #
 
- cat <<EOF | kubectl apply -f -
+cat <<EOF | kubectl apply -f -
 apiVersion: v1
 kind: Secret
 metadata:
