@@ -6,28 +6,24 @@ KIALI_USERNAME=$(read -p 'Kiali Username: ' uval && echo -n $uval | base64)   # 
 
 KIALI_PASSPHRASE=$(read -sp 'Kiali Passphrase: ' pval && echo -n $pval | base64)   # Enter Passphrase
 
-NAMESPACE=istio-system
+## Create namespace "istio-system" ##
 
-## Create a namespace ##
-
-kubectl create namespace $NAMESPACE
+kubectl create namespace istio-system
 
 ## Create a Secret with the variables ##
-# Works fine with "VERSION=1.15.11-gke.13" in the 'validMasterVersions' #
 
-cat <<EOF | kubectl apply -f -
-apiVersion: v1
+echo "apiVersion: v1
 kind: Secret
 metadata:
   name: kiali
-  namespace: $NAMESPACE
   labels:
     app: kiali
 type: Opaque
 data:
   username: $KIALI_USERNAME
-  passphrase: $KIALI_PASSPHRASE
-EOF
+  passphrase: $KIALI_PASSPHRASE" \
+    | kubectl --namespace istio-system \
+    apply --filename -
 
 ## Download Istio and set PATH (Refer: https://istio.io/docs/setup/getting-started/#download) ##
 
