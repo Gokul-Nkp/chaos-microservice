@@ -52,3 +52,13 @@ istioctl dashboard kiali
 istioctl dashboard grafana
 
 ### Click on the URL ###
+
+###########################################################################################
+
+:: Kiali ::
+https://istio.io/docs/tasks/observability/kiali/
+
+:: Grafana ::
+https://istio.io/docs/tasks/observability/metrics/using-istio-dashboard/
+
+###########################################################################################
