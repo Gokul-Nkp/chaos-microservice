@@ -1,0 +1,9 @@
+
+02-setup.sh = https://gist.github.com/vfarcic/37b4c10aca0d1214965506a146fc3488
+03-terminating-pods.sh = https://gist.github.com/vfarcic/419032bc714cc31cd2f72d45ebef07c7
+04-health.sh = https://gist.github.com/vfarcic/6be19a176b5cbe0261c81aefc86d516b
+05-network.sh = https://gist.github.com/vfarcic/455b0321879da7abf4d358a1334fd705
+06-node.sh = https://gist.github.com/vfarcic/bc334351b8f5659e903de2a6eb9e3079
+07-reporting.sh = https://gist.github.com/vfarcic/d81f114a887065a375279635a66ccac2
+08-k8s.sh = https://gist.github.com/vfarcic/015845b599beca995cdd8e67a7ec99db
+09-total.sh = https://gist.github.com/vfarcic/69bfc361eefd0a64cd92fdc4840f7aed
